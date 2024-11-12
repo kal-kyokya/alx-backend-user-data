@@ -54,8 +54,7 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    """ Implement db conectivity
-    """
+    """Implement db conectivity"""
     psw = os.environ.get("PERSONAL_DATA_DB_PASSWORD", "")
     username = os.environ.get('PERSONAL_DATA_DB_USERNAME', "root")
     host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
@@ -66,6 +65,20 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         user=username,
         password=psw)
     return conn
+
+
+def main() -> None:
+    """Implement a main function"""
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users;")
+    for row in cursor:
+        message = f"name={row[0]}; email={row[1]}; phone={row[2]}; " +\
+            f"ssn={row[3]}; password={row[4]};ip={row[5]}; " +\
+            f"last_login={row[6]}; user_agent={row[7]};"
+        print(message)
+    cursor.close()
+    db.close()
 
 
 if __name__ == '__main__':
