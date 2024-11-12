@@ -9,6 +9,9 @@ from typing import List
 import mysql.connector
 
 
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
 def filter_datum(fields: List[str],
                  redaction: str,
                  message: str,
@@ -37,6 +40,17 @@ class RedactingFormatter(logging.Formatter):
         """Filters values in incoming log records."""
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
+
+
+def get_logger() -> logging.Logger:
+    """Creates a Logger object."""
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    handler = logging.StreamHandler()
+    handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.addHandler(handler)
+    return logger
 
 
 if __name__ == '__main__':
