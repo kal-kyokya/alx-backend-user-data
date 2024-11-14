@@ -1,4 +1,4 @@
-# 0x01. Personal Data
+# 0x00. Personal Data
 
 This directory contains all python script generated for successful completion of the Personal Data project by ALX Africa to its Software Engineering program during its Specialization segment.
 
