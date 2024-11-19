@@ -34,7 +34,7 @@ This directory contains all python scripts generated for successful completion o
 			* Auth
 				Never directly with:
 					* DB
-	->	Only public methods of **Auth** and **DB** should be used outside these classes
+	->	Only public methods of Auth and DB should be used outside these classes
 
 ## Setup
 
