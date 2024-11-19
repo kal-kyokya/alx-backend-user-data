@@ -83,5 +83,8 @@ class DB:
                 source[key] = value
             else:
                 raise ValueError()
-        self._session.query(User).filter(User.id == user_id).update(source)
+        self._session.query(User).filter(User.id == user_id).update(
+            source,
+            synchronize_session=False,
+        )
         self._session.commit()
