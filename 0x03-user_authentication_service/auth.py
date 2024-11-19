@@ -9,5 +9,6 @@ def _hash_password(pwd):
     """
     '_hash_password' hashes any string input password.
     """
+    encoded_pwd = pwd.encode()
     salt = gensalt()
-    return (hashpw(pwd.encode(), salt))
+    return (hashpw(encoded_pwd, salt))
