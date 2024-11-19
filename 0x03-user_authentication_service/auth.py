@@ -5,7 +5,7 @@
 from bcrypt import gensalt, hashpw
 
 
-def _hash_password(pwd):
+def _hash_password(pwd: str) -> str:
     """
     '_hash_password' hashes any string input password.
     """
