@@ -9,9 +9,7 @@ from user import User
 my_db = DB()
 
 user_1 = my_db.add_user("test@test.com", "SuperHashedPwd")
-print(str(user_1.__dict__))
 print(str(user_1.id))
 
 user_2 = my_db.add_user("test1@test.com", "SuperHashedPwd1")
-print(str(user_2.__dict__))
 print(user_2.id)

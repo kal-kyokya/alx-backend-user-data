@@ -19,7 +19,7 @@ class DB:
         """
         Constructor method to Initialize a new DB instance
         """
-        self._engine = create_engine("sqlite:///a.db", echo=False)
+        self._engine = create_engine("sqlite:///a.db", echo=True)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -38,7 +38,12 @@ class DB:
         """
         'add_user' saves the input user to the database.
         """
-        user = User(email=email, hashed_password=hashed_pwd)
-        self._session.add(user)
-        self._session.commit()
-        return (user)
+        try:
+            new_user = User(email=email, hashed_password=hashed_pwd)
+            self._session.add(new_user)
+            self._session.commit()
+        except Exception as err:
+            self._session.rollback()
+            new_user = None
+            print(err)
+        return (new_user)
