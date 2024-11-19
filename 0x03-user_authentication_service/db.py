@@ -75,11 +75,13 @@ class DB:
         user = self.find_user_by(id=user_id)
         source = {}
 
-        if user:
-            for key, value in kwargs.items():
-                if hasattr(User, key):
-                    source[key] = value
-                else:
-                    raise ValueError()
-            self._session.query(User).filter(User.id == user_id).update(source)
-        return None
+        if user is None:
+            return
+
+        for key, value in kwargs.items():
+            if hasattr(User, key):
+                source[key] = value
+            else:
+                raise ValueError()
+        self._session.query(User).filter(User.id == user_id).update(source)
+        self._session.commit()
