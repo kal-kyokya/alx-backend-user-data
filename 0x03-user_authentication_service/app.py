@@ -3,7 +3,7 @@
 'app.py' contains an authentication facilitating Flask app
 """
 from auth import Auth
-from flask import abort, Flask, jsonify, request
+from flask import abort, Flask, jsonify, redirect, request
 
 
 AUTH = Auth()
@@ -54,8 +54,37 @@ def login():
                                 'message': 'logged in'})
             response.set_cookie('session_id', session_id)
             return (response)
-
         abort(401)
+
+
+@app.route('/sessions', methods=['DELETE'])
+def logout():
+    """
+    'logout' handles termination of ongoing sessions.
+    """
+    if request.method == 'DELETE':
+        session_id = str(request.cookies.get('session_id'))
+        print(session_id)
+        user = AUTH.get_user_from_session_id(session_id)
+        print(user.__dict__)
+        if user:
+            AUTH.destroy_session(user.id)
+            redirect('/')
+        abort(403)
+
+
+@app.route('/profile')
+def profile():
+    """
+    'profile' retrieves a user off of the request cookie.
+    """
+    session_id = str(request.cookies.get('session_id'))
+    print(request.cookies)
+    user = AUTH.get_user_from_session_id(session_id)
+    print(user.__dict__)
+    if user:
+        return (jsonify({'email': user.email}))
+    abort(403)
 
 
 if __name__ == "__main__":
