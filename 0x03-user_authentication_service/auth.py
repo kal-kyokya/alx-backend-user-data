@@ -46,7 +46,7 @@ class Auth:
 
     def valid_login(self, email: str, pwd: str) -> bool:
         """
-        'valid_login' matches a user's credential with the database.
+        'valid_login' verifies a user's credential prior to signing in.
         """
         try:
             user = self._db.find_user_by(email=email)
