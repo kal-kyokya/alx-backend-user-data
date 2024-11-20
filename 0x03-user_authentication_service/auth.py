@@ -84,6 +84,6 @@ class Auth:
         try:
             user = self._db.find_user_by(id=user_id)
             user.session_id = None
-            return (user.session.id)
+            return (user.session_id)
         except NoResultFound:
             return (None)
