@@ -70,6 +70,8 @@ class Auth:
         """
         Returns a user off of its session ID.
         """
+        if not session_id:
+            return (None)
         try:
             return (self._db.find_user_by(session_id=session_id))
         except NoResultFound:
