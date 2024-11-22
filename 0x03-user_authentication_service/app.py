@@ -64,12 +64,10 @@ def logout():
     """
     if request.method == 'DELETE':
         session_id = str(request.cookies.get('session_id'))
-        print(session_id)
         user = AUTH.get_user_from_session_id(session_id)
-        print(user.__dict__)
         if user:
             AUTH.destroy_session(user.id)
-            redirect('/')
+            return redirect('/')
         abort(403)
 
 
