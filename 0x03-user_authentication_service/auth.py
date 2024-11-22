@@ -44,13 +44,13 @@ class Auth:
             user = self._db.add_user(email, pwd)
             return (user)
 
-    def valid_login(self, email: str, pwd: str) -> bool:
+    def valid_login(self, email: str, password: str) -> bool:
         """
         'valid_login' verifies a user's credential prior to signing in.
         """
         try:
             user = self._db.find_user_by(email=email)
-            return (checkpw(pwd.encode('utf-8'), user.hashed_password))
+            return (checkpw(password.encode('utf-8'), user.hashed_password))
         except NoResultFound:
             return (False)
 
