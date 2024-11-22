@@ -92,7 +92,7 @@ def get_reset_password_token():
         email = request.form.get('email')
         session_id = AUTH.create_session(email)
         if session_id:
-            token = get_reset_password_token(email)
+            token = AUTH.get_reset_password_token(email)
             return (jsonify({'email': email,
                              'reset token': token}))
         abort(403)
