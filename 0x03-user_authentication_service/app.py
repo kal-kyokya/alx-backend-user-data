@@ -77,9 +77,7 @@ def profile():
     'profile' retrieves a user off of the request cookie.
     """
     session_id = str(request.cookies.get('session_id'))
-    print(request.cookies)
     user = AUTH.get_user_from_session_id(session_id)
-    print(user.__dict__)
     if user:
         return (jsonify({'email': user.email}))
     abort(403)
