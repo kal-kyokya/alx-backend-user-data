@@ -68,7 +68,7 @@ class DB:
             raise NoResultFound()
         return user
 
-    def update_user(self, user_id: int, **kwargs: str) -> None:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """
         Replaces old object values with new ones.
         """
