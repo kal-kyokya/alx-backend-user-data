@@ -98,8 +98,7 @@ def get_reset_password_token():
         if session_id:
             token = get_reset_password_token(email)
             return (jsonify({'email': email,
-                             'reset token': token})
-            )
+                             'reset token': token}))
         abort(403)
 
 
